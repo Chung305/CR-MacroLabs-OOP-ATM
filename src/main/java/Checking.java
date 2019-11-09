@@ -1,9 +1,10 @@
-public class Checking extends Account {
-    public Checking(){
-
-    }
-
-    public Checking(Double balance) {
-        super(balance);
-    }
-}
+//public class Checking extends Account {
+//    public Checking(){
+//
+//
+//    }
+//
+//    public Checking(Double balance) {
+//        super(balance);
+//    }
+//}
