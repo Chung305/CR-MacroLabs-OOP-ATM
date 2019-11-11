@@ -12,7 +12,7 @@ public class AccountVillage {
         this.nextId = 0;
     }
 
-    public Account createAccount(Double balance, Integer accountType) {
+    public Account createAccount(Double balance, Integer accountType, String userName) {
         nextId += 1;
         Account account = null;
         switch(accountType){
@@ -27,6 +27,7 @@ public class AccountVillage {
                 break;
         }
         if (account != null) {
+            account.setUserName(userName);
             this.accounts.put(nextId, account);
         }
         return account;
@@ -53,5 +54,9 @@ public class AccountVillage {
 
     public void setNextId(Integer nextId) {
         this.nextId = nextId;
+    }
+
+    public void closeAccountById(Integer id) {
+        this.accounts.remove(getAccountById(id));
     }
 }

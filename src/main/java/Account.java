@@ -4,11 +4,13 @@ public class Account {
     private Integer accountID;
     private Double balance;
     private ArrayList<String> transactionHistory;
+    private String userName;
 
-    public Account(Double balance, Integer id) {
+    public Account(Double balance, Integer id){//}, String userName) {
         this.balance = balance;
         this.accountID = id;
         this.transactionHistory = new ArrayList<String>();
+//        this.userName = userName;
     }
 
     public Account(Double balance) {
@@ -20,21 +22,21 @@ public class Account {
 
     public void deposit(Double amount) {
         if (amount > 0.0) {
-            this.setBalance(this.getBalance() + amount, String.format("Deposit to %s", this.getAccountID()));
+            this.setBalance(this.getBalance() + amount, String.format("Deposit to %s", this.getAccountString()));
         }
     }
 
     public Double withdraw(Double amount) {
         if (amount > 0 && amount <= this.getBalance()) {
-            this.setBalance(this.getBalance() - amount, String.format("Withdraw from %s", this.getAccountID()));
+            this.setBalance(this.getBalance() - amount, String.format("Withdraw from %s", this.getAccountString()));
         }
         return this.getBalance();
     }
 
     public void transfer(Account too, Double amount) {
         if (this.balance >= amount && amount > 0) {
-            this.setBalance(this.getBalance() - amount, String.format("Transfer to %s", too.getAccountID()));
-            too.setBalance(too.getBalance() + amount, String.format("Transfer from %s", this.getAccountID()));
+            this.setBalance(this.getBalance() - amount, String.format("Transfer to %s", too.getAccountString()));
+            too.setBalance(too.getBalance() + amount, String.format("Transfer from %s", this.getAccountString()));
         } else Console.println("Sorry, not enough currency to transfer.");
     }
 
@@ -96,5 +98,17 @@ public class Account {
 
     public String getName(){
         return "Account";
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public String getAccountString() {
+        return String.format("%s %s %s", this.getAccountID(), this.getName(), this.getUserName());
     }
 }
