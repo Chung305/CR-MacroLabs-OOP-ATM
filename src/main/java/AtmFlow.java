@@ -19,7 +19,7 @@ public class AtmFlow {
                 createAccount();
                 break;
             case 3 :
-
+                System.exit(0);
                 break;
             default :
                 Console.println("Not an Option, choose again");
