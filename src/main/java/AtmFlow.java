@@ -20,10 +20,11 @@ public class AtmFlow {
                 createAccount();
                 break;
             case 3 :
-
+                System.exit(0);
                 break;
             default :
                 Console.println("Not an Option, choose again");
+                start();
                 break;
         }
     }
@@ -86,12 +87,14 @@ public class AtmFlow {
                 Console.println("not an Option");
                 break;
         }
+        accountStart(userName);
     }
 
-    public void showTransactions(String userName) {
+    public String showTransactions(String userName) {
         Integer accountId = accountPrompt(userName);
         String history = accountVillage.getAccountById(accountId).getPrintableHistory();
         Console.println(history);
+        return history;
     }
 
     public void createAccount(){
@@ -106,7 +109,7 @@ public class AtmFlow {
         }
     }
 
-    public void createBankAccount(String userName){
+    public String createBankAccount(String userName){
         Double amount = Console.getDoubleInput("How much would you like to deposit");
         Integer accountType = Console.getIntegerInput("Which type of Account\n" +
                 "1 - Checking\n" +
@@ -116,8 +119,7 @@ public class AtmFlow {
         Integer id = account.getAccountID();
         userVillage.getUserByUsername(userName).addingAccount(id);
         Console.println("%s Account was created for %s", account.getName(), userName);
-
-        accountStart(userName);
+        return account.getAccountString();
     }
 
 
@@ -127,7 +129,7 @@ public class AtmFlow {
         accountVillage.getAccountById(account).withdraw(withdrawAmount);
         Console.println("Withdrawing : " + withdrawAmount );
         promptNewBalance(account);
-        accountStart(userName);
+//        accountStart(userName);
     }
     public void deposit(String userName){
         Double depositAmount = Console.getDoubleInput("How much would you like to deposit?");
@@ -135,7 +137,7 @@ public class AtmFlow {
         accountVillage.getAccountById(account).deposit(depositAmount);
         Console.println("Depositing : " + depositAmount);
         promptNewBalance(account);
-        accountStart(userName);
+//        accountStart(userName);
 
     }
     public void transfer(String userName){
@@ -149,7 +151,7 @@ public class AtmFlow {
         } while(!accountVillage.getAccounts().keySet().contains(targetAccountId)
                 || !(accountVillage.getAccountById(sourceAccountId).getBalance() >= transferAmount));
         accountVillage.getAccountById(sourceAccountId).transfer(accountVillage.getAccountById(targetAccountId),transferAmount);
-        accountStart(userName);
+//        accountStart(userName);
     }
 
     /////////PROMPT//////

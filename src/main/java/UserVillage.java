@@ -10,9 +10,10 @@ public class UserVillage {
         this.allUsers.add(user);
     }
 
-    public void createUser(String name, String password){
+    public User createUser(String name, String password){
         User user = new User(allUsers.size(), name, password);
         this.allUsers.add(user);
+        return user;
     }
     ///GETTERS SETTERS////
     public Boolean checkLogIn(String username, String password){
