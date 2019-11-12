@@ -96,5 +96,15 @@ public class UserVillageTest {
         Assert.assertTrue(checking);
     }
 
+    @Test
+    public void testGetUserByUserName() {
+        UserVillage userVillage = new UserVillage();
+        userVillage.createUser("wes","wes");
+        userVillage.createUser("chung", "chung");
+        String actual = userVillage.getUserByUsername("wes").getUserName();
+        String expected = "wes";
+        Assert.assertEquals(expected, actual);
+    }
+
 
 }

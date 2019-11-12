@@ -57,6 +57,7 @@ public class AccountVillage {
     }
 
     public void closeAccountById(Integer id) {
-        this.accounts.remove(getAccountById(id));
+        this.accounts.remove(id);
+
     }
 }

@@ -19,12 +19,31 @@ public class AccountVillageTest {
     }
 
     @Test
-    public void createAccountTest() {
+    public void createAccountTest1() {
         AccountVillage newAV = new AccountVillage();
         Integer expectedSize = newAV.getAccounts().size() + 1;
         newAV.createAccount(100.0, 1,"");
 
         Integer actualSize = newAV.getAccounts().size();
+        Assert.assertEquals(expectedSize, actualSize);
+    }
+    @Test
+    public void createAccountTest2() {
+        AccountVillage newAV = new AccountVillage();
+        Integer id = newAV.getAccounts().size() + 1;
+        newAV.createAccount(100.0, 2,"Abe");
+
+        String actual = newAV.getAccountById(id).getAccountString();
+        Assert.assertEquals("1 Savings Abe", actual);
+    }
+    @Test
+    public void createAccountTest3() {
+        AccountVillage newAV = new AccountVillage();
+        Integer expectedSize = newAV.getAccounts().size() + 1;
+        newAV.createAccount(100.0, 3,"Hat");
+        String actual =  newAV.getAccountById(expectedSize).getAccountString();
+        Integer actualSize = newAV.getAccounts().size();
+        Assert.assertEquals("1 Investment Hat", actual);
         Assert.assertEquals(expectedSize, actualSize);
     }
 
@@ -78,5 +97,16 @@ public class AccountVillageTest {
         newAV.setNextId(2);
         Integer actual = newAV.getNextId();
         Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testCloseAccountById() {
+        AccountVillage newAV = new AccountVillage();
+        Integer id = newAV.getAccounts().size() + 1;
+        newAV.createAccount(0.0, 2,"Abe");
+        Boolean before = newAV.getAccounts().containsKey(id);
+        newAV.closeAccountById(id);
+        Boolean after = newAV.getAccounts().containsKey(id);
+        Assert.assertNotEquals(before, after);
     }
 }

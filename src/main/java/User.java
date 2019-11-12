@@ -17,7 +17,12 @@ public class User {
 
     public void removeAccount(Integer accountId) {
         if (checkIfUserHasAccount(accountId)) {
-            this.accountsIds.remove(accountId);
+            for (int i = 0; i < this.accountsIds.size(); i++) {
+                if (accountId.equals(this.accountsIds.get(i))) {
+                    this.accountsIds.remove(i);
+                    break;
+                }
+            }
         }
     }
 
