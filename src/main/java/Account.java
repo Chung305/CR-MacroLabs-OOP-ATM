@@ -1,4 +1,7 @@
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.time.*;
+
 
 public class Account {
     private Integer accountID;
@@ -74,7 +77,7 @@ public class Account {
     }
 
     public String buildTransactionReport(Double oldBalance, Double newBalance, Double amountTransferred, String transactionType) {
-        return String.format("Transaction: %s $%.2f\n\tOld Balance:\t$%.2f\n\tNew Balance:\t$%.2f",
+        return String.format(dateTime() + "\nTransaction: %s $%.2f\n\tOld Balance:\t$%.2f\n\tNew Balance:\t$%.2f",
                 transactionType, amountTransferred, oldBalance, newBalance);
     }
 
@@ -94,6 +97,12 @@ public class Account {
             history.append("\n"+report);
         }
         return history.toString();
+    }
+
+    public String dateTime(){
+        LocalDateTime locDateTime = LocalDateTime.now();
+        DateTimeFormatter dTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return locDateTime.format(dTimeFormat);
     }
 
     public String getName(){
